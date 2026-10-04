@@ -444,7 +444,7 @@
 				<caseTrue>
 					<!-- candelabra -->
 					<Operation Class="XmlExtensions.HybridPatch">
-						<li>ferny.progressionfurniture</li>
+						<xpath>Defs/ThingDef[defName="VFEE_Candelabra"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
 								<li Operation="SafeAdd" Compare="InnerText">Ferny_StandingLamp</li>
@@ -460,6 +460,7 @@
 				</mods>
 				<packageId>true</packageId>
 				<caseTrue>
+					<!-- Progression: Furniture -->
 					<Operation Class="XmlExtensions.HybridPatch">
 						<xpath>Defs/ResearchProjectDef[defName="Ferny_ErgonomicChair"]</xpath>
 						<value>
