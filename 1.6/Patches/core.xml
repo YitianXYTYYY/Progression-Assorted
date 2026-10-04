@@ -7,6 +7,7 @@
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
+			<!-- Core -->
 			<Operation Class="XmlExtensions.HybridPatch">
 				<xpath>Defs/ResearchProjectDef[defName="PassiveCooler"]</xpath>
 				<value>

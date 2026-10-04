@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
-	<!-- Progression: Hives -->
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionhives</li>
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
+			<!-- Progression: Hives -->
 			<Operation Class="XmlExtensions.HybridPatch">
 				<xpath>Defs/ResearchProjectDef[defName="Ferny_Creeper" or 
 					defName="Ferny_GlowPod" or 

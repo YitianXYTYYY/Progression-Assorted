@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
-	<!-- Progression: Kitchen -->
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionkitchen</li>
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
+			<!-- Progression: Kitchen -->
 			<Operation Class="XmlExtensions.SetScope">
 				<xpath>Defs/ResearchProjectDef[defName="Ferny_FueledStove"]</xpath>
 				<apply>
@@ -43,6 +43,7 @@
 					</hiddenPrerequisites>
 				</value>
 			</Operation>
+			<!-- Vanilla Helixien Gas Expanded -->
 			<Operation Class="XmlExtensions.FindMod">
 				<mods>
 					<li>vanillaexpanded.helixiengas</li>

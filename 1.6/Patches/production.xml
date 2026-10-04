@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
-	<!-- Progression: Production -->
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionproduction</li>
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
+			<!-- Progression: Production -->
 			<Operation Class="XmlExtensions.SetScope">
 				<xpath>Defs/ResearchProjectDef[defName="DrugProduction"]</xpath>
 				<apply>
@@ -38,6 +38,7 @@
 					</Operation>
 				</apply>
 			</Operation>
+			<!-- Vanilla Helixien Gas Expanded -->
 			<Operation Class="XmlExtensions.FindMod">
 				<mods>
 					<li>vanillaexpanded.helixiengas</li>
