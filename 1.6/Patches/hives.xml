@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- Progression: Hives -->
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressionhives</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_Creeper" or 
+					defName="Ferny_GlowPod" or 
+					defName="Ferny_DeepHeater" or 
+					defName="Ferny_HiveStructure" or 
+					defName="Ferny_JellyFarm" or 
+					defName="Ferny_Thornspitter" or 
+					defName="Ferny_BurrowWalls" or 
+					defName="Ferny_LargeGlowPod" or 
+					defName="Ferny_GlowPodFormation" or 
+					defName="Ferny_FoamPod" or 
+					defName="Ferny_HeatPod" or 
+					defName="Ferny_Jellyspreader" or 
+					defName="Ferny_TendrilFarm" or 
+					defName="Ferny_ThornPod" or 
+					defName="Ferny_KemianHive" or 
+					defName="Ferny_NuchadusHive" or 
+					defName="Ferny_XanidesHive" or 
+					defName="Ferny_GlowPodSpire" or 
+					defName="Ferny_JellyMorpher" or 
+					defName="Ferny_Hivenode" or 
+					defName="Ferny_Petroglypher" or 
+					defName="Ferny_StaticPod" or 
+					defName="Ferny_RoyalJellyspreader" or 
+					defName="Ferny_RoyalJellyWall"]</xpath>
+				<value>
+					<tab Operation="AddOrReplace">TechInsectoids</tab>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_Thornworm" or 
+					defName="Ferny_Vilelobber"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_Thornspitter</li>
+					</prerequisites>
+					<hiddenPrerequisites Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Ferny_Thornspitter</li>
+					</hiddenPrerequisites>
+					<tab Operation="AddOrReplace">TechInsectoids</tab>
+				</value>
+			</Operation>
+			<!-- Vanilla Factions Expanded - Insectoids 2 -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>oskarpotocki.vfe.insectoid2</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="VFEI2_BasicHivetech" or 
+							defName="VFEI2_StandardHivetech" or 
+							defName="VFEI2_ExoticHivetech"]</xpath>
+						<value>
+							<tab Operation="AddOrReplace">TechInsectoids</tab>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+		</caseTrue>
+	</Operation>
+
+</Patch>

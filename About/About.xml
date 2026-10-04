@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<packageId>xytyyy.progression</packageId>
+	<name>Progression Mods Assorted by xytyyy</name>
+	<author>xytyyy</author>
+	<modVersion>1.0.0</modVersion>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<url>https://github.com/YitianXYTYYY/Progression-Assorted</url>
+	<description>
+Personal made patches for Ferny's Progression series.
+	</description>
+	<modDependencies>
+		<li>
+    		<packageId>imranfish.xmlextensions</packageId>
+			<displayName>XML Extensions</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2574315206</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>ferny.progressionattire</li>
+		<li>ferny.progressioncore</li>
+		<li>ferny.progressionfurniture</li>
+		<li>ferny.progressiongenetics</li>
+		<li>ferny.progressiongravship</li>
+		<li>ferny.progressionhives</li>
+		<li>ferny.progressionkitchen</li>
+		<li>ferny.progressionproduction</li>
+		<li>ferny.progressionrobotics2</li>
+		<li>ferny.progressionstorage</li>
+		<li>ferny.replacelib</li>
+	</loadAfter>
+</ModMetaData>

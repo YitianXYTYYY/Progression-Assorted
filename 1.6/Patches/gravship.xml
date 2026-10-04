@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressiongravship</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
+			<!-- Odyssey -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>ludeon.rimworld.odyssey</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="BasicGravtech"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
+							</prerequisites>
+							<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+							<tab Operation="AddOrReplace">TechGravship</tab>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="StandardGravtech"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">MicroelectronicsBasics</li>
+							</prerequisites>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+							<tab Operation="AddOrReplace">TechGravship</tab>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="AdvancedGravtech"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Fabrication</li>
+							</prerequisites>
+							<hiddenPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
+							</hiddenPrerequisites>
+							<tab Operation="AddOrReplace">TechGravship</tab>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Biotech for Gravship -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>als.biotechgravship</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- mounted band node -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="BfG_BandNode"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">BasicMechtech</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_BandNode</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- floor mech booster -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="BfG_MechBooster"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">HighMechtech</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_MechBooster</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Progression: Gravship -->
+		</caseTrue>
+	</Operation>
+
+</Patch>

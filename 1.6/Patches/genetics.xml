@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- Progression: Genetics -->
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressiongenetics</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
+			<!-- Biotech -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>ludeon.rimworld.biotech</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="GeneProcessor"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">MicroelectronicsBasics</li>
+							</prerequisites>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Biotech for Gravship -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>als.biotechgravship</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- vertical gene bank -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="BfG_GeneBank"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">GR_GeneticAlteration</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- smaller gene extractor -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="BfG_GeneExtractor"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Xenogermination</li>
+								<li Operation="SafeAdd" Compare="InnerText">GR_GeneticAlteration</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Genepack Reprocessor -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>anonemous2.genepackreprocessor</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- genepack reprocessor -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="GeneSeparator"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">GeneProcessor</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_GenepackCentrifuge</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- ReSplice: Core -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>resplice.xotr.core</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_GenepackCentrifuge"]</xpath>
+						<value>
+							<prerequisites Operation="SafeReplace">
+								<li>GeneProcessor</li>
+							</prerequisites>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_XenogermReplicator"]</xpath>
+						<value>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Vanilla Genetics Expanded -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>vanillaexpanded.vgeneticse</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="GR_GeneticAlteration"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">MicroelectronicsBasics</li>
+								<li Operation="SafeAdd" Compare="InnerText">GrowthVats</li>
+							</prerequisites>
+							<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="GR_GeneticEngineering" or 
+							defName="GR_GeneticDuplication" or 
+							defName="GR_HybridImplantology" or 
+							defName="GR_GeneticCompatibility"]</xpath>
+						<value>
+							<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="GR_GeneticMechahybridization"]</xpath>
+						<value>
+							<requiredAnalyzed Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">GR_MechanoidChip</li>
+							</requiredAnalyzed>
+							<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+		</caseTrue>
+	</Operation>
+
+</Patch>
