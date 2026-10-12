@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressionrobotics2</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
+			<!-- Biotech -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>ludeon.rimworld.biotech</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[@Name="MechtechBase"]</xpath>
+						<value>
+							<tab Operation="AddOrReplace">TechMechanoids</tab>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="BasicMechtech"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">MicroelectronicsBasics</li>
+							</prerequisites>
+							<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="StandardMechtech"]</xpath>
+						<value>
+							<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+							<requiredResearchFacilities Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+							</requiredResearchFacilities>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Progression: Robotics -->
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_Cleansweeper" or 
+					defName="Ferny_Agrihand" or 
+					defName="Ferny_AirwireHeadset" or 
+					defName="Ferny_BandNode" or 
+					defName="Ferny_ControlPack" or 
+					defName="Ferny_Militor" or 
+					defName="Ferny_ControlSublink" or 
+					defName="Ferny_ControlSublinkHigh" or 
+					defName="Ferny_ArrayHeadset" or 
+					defName="Ferny_BandwidthPack" or 
+					defName="Ferny_Cyclops" or 
+					defName="Ferny_MechGestationProcessor" or 
+					defName="Ferny_MechCommanderHelmet" or 
+					defName="Ferny_Pikeman" or 
+					defName="Ferny_Scorcher" or 
+					defName="Ferny_Tunneler" or 
+					defName="Ferny_Centipedes" or 
+					defName="Ferny_Diabolus" or 
+					defName="Ferny_Fabricor" or 
+					defName="Ferny_IntegratorHeadset" or 
+					defName="Ferny_MechBooster" or 
+					defName="Ferny_Paramedic" or 
+					defName="Ferny_RemoteRepairer" or 
+					defName="Ferny_RemoteShielder" or 
+					defName="Ferny_MechlordSuit" or 
+					defName="Ferny_RepairProbe" or 
+					defName="Ferny_WarQueen" or 
+					defName="Ferny_Legionary" or 
+					defName="Ferny_Tesseron"]</xpath>
+				<value>
+					<tab Operation="AddOrReplace">TechMechanoids</tab>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_CentipedeBlaster"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_Centipedes</li>
+					</prerequisites>
+					<hiddenPrerequisites Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Ferny_Centipedes</li>
+					</hiddenPrerequisites>
+					<tab Operation="AddOrReplace">TechMechanoids</tab>
+				</value>
+			</Operation>
+		</caseTrue>
+	</Operation>
+
+</Patch>

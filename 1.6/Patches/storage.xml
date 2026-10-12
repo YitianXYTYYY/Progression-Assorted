@@ -7,59 +7,6 @@
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
-			<!-- Odyssey -->
-			<Operation Class="XmlExtensions.FindMod">
-				<mods>
-					<li>ludeon.rimworld.odyssey</li>
-				</mods>
-				<packageId>true</packageId>
-				<caseTrue>
-					<Operation Class="XmlExtensions.SetScope">
-						<xpath>Defs/ResearchProjectDef[defName="Ferny_OutfitStands"]</xpath>
-						<apply>
-							<Operation Class="XmlExtensions.FindMod">
-								<mods>
-									<li>vanillaexpanded.vfecore</li>
-								</mods>
-								<packageId>true</packageId>
-								<caseTrue>
-									<Operation Class="XmlExtensions.HybridPatch">
-										<xpath>ResearchProjectDef</xpath>
-										<value>
-											<prerequisites Operation="Safe">
-												<li Operation="SafeAdd" Compare="InnerText">MF_BasicFurniture</li>
-												<li Operation="SafeRemove" Compare="InnerText">VFET_Furniture</li>
-											</prerequisites>
-										</value>
-									</Operation>
-								</caseTrue>
-							</Operation>
-						</apply>
-					</Operation>
-				</caseTrue>
-			</Operation>
-			<!-- Progression: Storage -->
-			<Operation Class="XmlExtensions.SetScope">
-				<xpath>Defs/ResearchProjectDef[defName="Ferny_Shelves"]</xpath>
-				<apply>
-					<Operation Class="XmlExtensions.FindMod">
-						<mods>
-							<li>reel.expanded.storage</li>
-						</mods>
-						<packageId>true</packageId>
-						<caseTrue>
-							<Operation Class="XmlExtensions.HybridPatch">
-								<xpath>ResearchProjectDef</xpath>
-								<value>
-									<prerequisites Operation="Safe">
-										<li Operation="SafeAdd" Compare="InnerText">ReelNeolithicStorage</li>
-									</prerequisites>
-								</value>
-							</Operation>
-						</caseTrue>
-					</Operation>
-				</apply>
-			</Operation>
 			<!-- Reel's Expanded Storage -->
 			<Operation Class="XmlExtensions.FindMod">
 				<mods>
@@ -67,26 +14,24 @@
 				</mods>
 				<packageId>true</packageId>
 				<caseTrue>
-					<Operation Class="XmlExtensions.SetScope">
-						<xpath>Defs/ResearchProjectDef[defName="ReelNeolithicStorage"]</xpath>
-						<apply>
-							<Operation Class="XmlExtensions.FindMod">
-								<mods>
-									<li>vanillaexpanded.vfecore</li>
-								</mods>
-								<packageId>true</packageId>
-								<caseTrue>
-									<Operation Class="XmlExtensions.HybridPatch">
-										<xpath>ResearchProjectDef</xpath>
-										<value>
-											<prerequisites Operation="Safe">
-												<li Operation="SafeAdd" Compare="InnerText">MF_BasicFurniture</li>
-											</prerequisites>
-										</value>
-									</Operation>
-								</caseTrue>
-							</Operation>
-						</apply>
+					<!-- tool cabinet -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ToolCabinet"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+								<li Operation="SafeAdd" Compare="InnerText">ReelMedievalStorage</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- Progression: Storage -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_Shelves"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">ReelNeolithicStorage</li>
+							</prerequisites>
+						</value>
 					</Operation>
 					<Operation Class="XmlExtensions.HybridPatch">
 						<xpath>Defs/ResearchProjectDef[defName="ReelMedievalStorage"]</xpath>
@@ -110,27 +55,6 @@
 									</prerequisites>
 								</value>
 							</Operation>
-							<!-- Vanilla Furniture Expanded -->
-							<Operation Class="XmlExtensions.FindMod">
-								<mods>
-									<li>vanillaexpanded.vfecore</li>
-								</mods>
-								<packageId>true</packageId>
-								<caseTrue>
-									<Operation Class="XmlExtensions.HybridPatch">
-										<xpath>ResearchProjectDef</xpath>
-										<value>
-											<prerequisites Operation="Safe">
-												<li Operation="SafeAdd" Compare="InnerText">MF_ModernFurniture</li>
-												<li Operation="SafeRemove" Compare="InnerText">ReelMedievalStorage</li>
-											</prerequisites>
-											<hiddenPrerequisites Operation="Safe">
-												<li Operation="SafeAdd" Compare="InnerText">ReelMedievalStorage</li>
-											</hiddenPrerequisites>
-										</value>
-									</Operation>
-								</caseTrue>
-							</Operation>
 						</apply>
 					</Operation>
 					<Operation Class="XmlExtensions.HybridPatch">
@@ -147,6 +71,78 @@
 							<requiredResearchFacilities Operation="Safe">
 								<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
 							</requiredResearchFacilities>
+						</value>
+					</Operation>
+					<!-- double shelf -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelNewIndustrialShelf"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Shelves</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- industrial skip -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageSkip"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Smithing</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- apparel locker -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageNewLargeLocker"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Shelves</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- large metal crate -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageLargeMetalCrate"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Boxes</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- metal crate -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageMetalCrate"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Boxes</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- vertical weapon rack -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageVerticalWeaponRack"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_WeaponRack</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- vertical weapon rack -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageVerticalWeaponRack"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_WeaponRack</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- horizontal weapon rack -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="ReelStorageHorizontalWeaponRack"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_WeaponRack</li>
+							</researchPrerequisites>
 						</value>
 					</Operation>
 					<!-- Progression: Storage -->
@@ -166,8 +162,9 @@
 						<xpath>Defs/ResearchProjectDef[defName="Ferny_MeatHook"]</xpath>
 						<value>
 							<prerequisites Operation="Safe">
-								<li Operation="SafeAdd" Compare="InnerText">ReelMedievalStorage</li>
+								<li Operation="SafeAdd" Compare="InnerText">ReelNeolithicStorage</li>
 							</prerequisites>
+							<techLevel Operation="SafeReplace">Neolithic</techLevel>
 						</value>
 					</Operation>
 					<Operation Class="XmlExtensions.HybridPatch">
@@ -181,6 +178,108 @@
 								<li Operation="SafeAdd" Compare="InnerText">AirConditioning</li>
 							</hiddenPrerequisites>
 						</value>
+					</Operation>
+					<!-- Vanilla Furniture Expanded - Props and Decor -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>vanillaexpanded.vfepropsanddecor</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<!-- barrel pallet -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="ReelStorageBarrelPallet"]</xpath>
+								<value>
+									<researchPrerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">Ferny_Barrels</li>
+										<li Operation="SafeRemove" Compare="InnerText">ReelIndustrialStorage</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+							<!-- bookshelf -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="ReelStorageBookshelf"]</xpath>
+								<value>
+									<researchPrerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">Ferny_Shelves</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+						</caseTrue>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Vanilla Furniture Expanded -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>vanillaexpanded.vfecore</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- Odyssey -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>ludeon.rimworld.odyssey</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="Ferny_OutfitStands"]</xpath>
+								<value>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">MF_BasicFurniture</li>
+										<li Operation="SafeRemove" Compare="InnerText">VFET_Furniture</li>
+									</prerequisites>
+								</value>
+							</Operation>
+						</caseTrue>
+					</Operation>
+					<!-- Reel's Expanded Storage -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>reel.expanded.storage</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="ReelNeolithicStorage"]</xpath>
+								<value>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">MF_BasicFurniture</li>
+									</prerequisites>
+								</value>
+							</Operation>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="ReelIndustrialStorage"]</xpath>
+								<value>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">MF_ModernFurniture</li>
+										<li Operation="SafeRemove" Compare="InnerText">ReelMedievalStorage</li>
+									</prerequisites>
+									<hiddenPrerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">ReelMedievalStorage</li>
+									</hiddenPrerequisites>
+								</value>
+							</Operation>
+							<!-- filing cabinet -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="Misc_FileCabinet"]</xpath>
+								<value>
+									<researchPrerequisites Operation="SafeReplace">
+										<li>ReelMedievalStorage</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+							<!-- wardrobe -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="Table_Wardrobe"]</xpath>
+								<value>
+									<researchPrerequisites Operation="SafeReplace">
+										<li>ReelMedievalStorage</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+						</caseTrue>
 					</Operation>
 				</caseTrue>
 			</Operation>

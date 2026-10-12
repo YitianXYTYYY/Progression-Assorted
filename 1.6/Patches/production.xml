@@ -8,6 +8,14 @@
 		<packageId>true</packageId>
 		<caseTrue>
 			<!-- Progression: Production -->
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_ResearchBench"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Culture</li>
+					</prerequisites>
+				</value>
+			</Operation>
 			<Operation Class="XmlExtensions.SetScope">
 				<xpath>Defs/ResearchProjectDef[defName="DrugProduction"]</xpath>
 				<apply>

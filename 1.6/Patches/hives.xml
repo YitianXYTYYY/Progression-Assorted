@@ -4,6 +4,7 @@
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionhives</li>
+			<li>cruesoe.progressionlesshives</li>
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
@@ -14,8 +15,14 @@
 					defName="Ferny_DeepHeater" or 
 					defName="Ferny_HiveStructure" or 
 					defName="Ferny_JellyFarm" or 
-					defName="Ferny_Thornspitter" or 
-					defName="Ferny_BurrowWalls" or 
+					defName="Ferny_Thornspitter"]</xpath>
+				<value>
+					<tab Operation="AddOrReplace">TechInsectoids</tab>
+					<techLevel Operation="SafeReplace">Medieval</techLevel>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_BurrowWalls" or 
 					defName="Ferny_LargeGlowPod" or 
 					defName="Ferny_GlowPodFormation" or 
 					defName="Ferny_FoamPod" or 
@@ -58,11 +65,59 @@
 				<packageId>true</packageId>
 				<caseTrue>
 					<Operation Class="XmlExtensions.HybridPatch">
-						<xpath>Defs/ResearchProjectDef[defName="VFEI2_BasicHivetech" or 
-							defName="VFEI2_StandardHivetech" or 
-							defName="VFEI2_ExoticHivetech"]</xpath>
+						<xpath>Defs/ResearchProjectDef[defName="VFEI2_BasicHivetech"]</xpath>
+						<value>
+							<requiredAnalyzed Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">InsectJelly</li>
+							</requiredAnalyzed>
+							<tab Operation="AddOrReplace">TechInsectoids</tab>
+							<techLevel Operation="SafeReplace">Medieval</techLevel>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="VFEI2_StandardHivetech"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
+							</prerequisites>
+							<hiddenPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</hiddenPrerequisites>
+							<tab Operation="AddOrReplace">TechInsectoids</tab>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="VFEI2_ExoticHivetech"]</xpath>
 						<value>
 							<tab Operation="AddOrReplace">TechInsectoids</tab>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="InsectJelly"]</xpath>
+						<value>
+							<comps Operation="Safe">
+								<li Class="CompProperties_CompAnalyzableUnlockResearch" Operation="SafeAdd" CheckAttributes="True">
+									<analysisID>10006502</analysisID>
+									<requiresMechanitor>false</requiresMechanitor>
+									<analysisDurationHours>0.5</analysisDurationHours>
+									<destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+									<completedLetterLabel>Insect jelly studied: {RESEARCH} unlocked</completedLetterLabel>
+									<completedLetter>By studying insect jelly, {PAWN_labelShort} has acquired the insight needed for the research project(s) {RESEARCH}.\n\nYour researchers can now use research benches to begin researching how to actually use the technology.</completedLetter>
+									<completedLetterDef>PositiveEvent</completedLetterDef>
+									<activateTexPath>UI/Icons/Study</activateTexPath>
+									<activateLabelString>Analyze...</activateLabelString>
+									<activateDescString>Analyze insect jelly.</activateDescString>
+									<jobString>Analyze insect jelly</jobString>
+									<guiLabelString>Choose who should analyze this</guiLabelString>
+									<inspectString>Can be analyzed by a colonist.</inspectString>
+									<targetingParameters>
+										<canTargetBuildings>false</canTargetBuildings>
+										<canTargetAnimals>false</canTargetAnimals>
+										<canTargetMechs>false</canTargetMechs>
+										<onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+									</targetingParameters>
+								</li>
+							</comps>
 						</value>
 					</Operation>
 				</caseTrue>

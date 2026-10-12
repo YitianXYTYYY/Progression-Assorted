@@ -4,6 +4,7 @@
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionattire</li>
+			<li>cruesoe.progressionlessattire</li>
 		</mods>
 		<packageId>true</packageId>
 		<caseFalse>

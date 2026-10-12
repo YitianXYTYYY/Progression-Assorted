@@ -37,6 +37,25 @@
 					</Operation>
 				</caseTrue>
 			</Operation>
+			<!-- Helixien Gas Brazier -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>cixwow.helixienbrazier</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- helixien gas brazier -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="HelixienGasBrazier"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Brazier</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
 			<!-- Progression: Furniture -->
 			<Operation Class="XmlExtensions.SetScope">
 				<xpath>Defs/ResearchProjectDef[defName="Ferny_PlantPots"]</xpath>
@@ -435,6 +454,25 @@
 					</Operation>
 				</caseTrue>
 			</Operation>
+			<!-- Undergrounders: Darkfire -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>battiebear.undergrounders.darkfire</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- fungus darklight brazier -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="undrgdrs_FungusDarklightBrazier"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Brazier</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
 			<!-- Vanilla Factions Expanded - Empire -->
 			<Operation Class="XmlExtensions.FindMod">
 				<mods>
@@ -460,6 +498,37 @@
 				</mods>
 				<packageId>true</packageId>
 				<caseTrue>
+					<!-- royal bed -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="RoyalBed"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+								<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- Royalty -->
+					<!-- meditation throne -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="Throne"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+								<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- grand meditation throne -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="GrandThrone"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+								<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
 					<!-- Progression: Furniture -->
 					<Operation Class="XmlExtensions.HybridPatch">
 						<xpath>Defs/ResearchProjectDef[defName="Ferny_ErgonomicChair"]</xpath>
@@ -575,6 +644,53 @@
 								<li Operation="SafeRemove" Compare="InnerText">VFET_Furniture</li>
 							</prerequisites>
 						</value>
+					</Operation>
+					<!-- Vanilla Factions Expanded - Empire -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>oskarpotocki.vfe.empire</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="VFEE_NobleDecorations"]</xpath>
+								<value>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
+										<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
+									</prerequisites>
+								</value>
+							</Operation>
+							<!-- royal stool -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="VFEE_RoyalStool"]</xpath>
+								<value>
+									<researchPrerequisites Operation="Safe">
+										<li Operation="SafeRemove" Compare="InnerText">VFEE_NobleDecorations</li>
+										<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+							<!-- royal mirror -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="VFEE_RoyalMirror"]</xpath>
+								<value>
+									<researchPrerequisites Operation="Safe">
+										<li Operation="SafeRemove" Compare="InnerText">VFEE_NobleDecorations</li>
+										<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+							<!-- small stele -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="VFEE_SteleSmall"]</xpath>
+								<value>
+									<researchPrerequisites Operation="Safe">
+										<li Operation="SafeRemove" Compare="InnerText">VFEE_NobleDecorations</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+						</caseTrue>
 					</Operation>
 				</caseTrue>
 			</Operation>
