@@ -4,6 +4,27 @@
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionhives</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_Thornworm" or 
+					defName="Ferny_Vilelobber"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_Thornspitter</li>
+					</prerequisites>
+					<hiddenPrerequisites Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Ferny_Thornspitter</li>
+					</hiddenPrerequisites>
+				</value>
+			</Operation>
+		</caseTrue>
+	</Operation>
+
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressionhives</li>
 			<li>cruesoe.progressionlesshives</li>
 		</mods>
 		<packageId>true</packageId>
@@ -39,21 +60,10 @@
 					defName="Ferny_Petroglypher" or 
 					defName="Ferny_StaticPod" or 
 					defName="Ferny_RoyalJellyspreader" or 
-					defName="Ferny_RoyalJellyWall"]</xpath>
-				<value>
-					<tab Operation="AddOrReplace">TechInsectoids</tab>
-				</value>
-			</Operation>
-			<Operation Class="XmlExtensions.HybridPatch">
-				<xpath>Defs/ResearchProjectDef[defName="Ferny_Thornworm" or 
+					defName="Ferny_RoyalJellyWall" or 
+					defName="Ferny_Thornworm" or 
 					defName="Ferny_Vilelobber"]</xpath>
 				<value>
-					<prerequisites Operation="Safe">
-						<li Operation="SafeRemove" Compare="InnerText">Ferny_Thornspitter</li>
-					</prerequisites>
-					<hiddenPrerequisites Operation="Safe">
-						<li Operation="SafeAdd" Compare="InnerText">Ferny_Thornspitter</li>
-					</hiddenPrerequisites>
 					<tab Operation="AddOrReplace">TechInsectoids</tab>
 				</value>
 			</Operation>
