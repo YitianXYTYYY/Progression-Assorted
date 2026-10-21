@@ -12,8 +12,12 @@
 				<xpath>Defs/ResearchProjectDef[defName="Ferny_ResearchBench"]</xpath>
 				<value>
 					<prerequisites Operation="Safe">
+						<li MayRequire="ferny.progressionfurniture" Operation="SafeAdd" Compare="InnerText">Ferny_Tables</li>
 						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Culture</li>
 					</prerequisites>
+					<hiddenPrerequisites Operation="Safe">
+						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Culture</li>
+					</hiddenPrerequisites>
 				</value>
 			</Operation>
 			<Operation Class="XmlExtensions.SetScope">
