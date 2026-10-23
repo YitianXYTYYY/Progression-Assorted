@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ResearchProjectDef MayRequire="ludeon.rimworld.biotech,ferny.progressionfurniture">
+		<defName>Ferny_School</defName>
+		<label>educational furniture</label>
+		<description>Build furnitures dedicated to child education.</description>
+		<baseCost>500</baseCost>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>31.50</researchViewX>
+		<researchViewY>0.00</researchViewY>
+		<prerequisites>
+			<li>ComplexFurniture</li>
+		</prerequisites>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef MayRequire="vanillaexpanded.vfecore,ferny.progressionfurniture">
+		<defName>Ferny_PunchingBag</defName>
+		<label>punching bag</label>
+		<description>Build a sturdy, stand-mounted punching bag for combat training and stress relief. Using it slowly trains melee ability.</description>
+		<baseCost>400</baseCost>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>31.50</researchViewX>
+		<researchViewY>0.50</researchViewY>
+		<prerequisites>
+			<li>Ferny_Bedroll</li>
+			<li>ComplexFurniture</li>
+		</prerequisites>
+	</ResearchProjectDef>
+
+</Defs>
