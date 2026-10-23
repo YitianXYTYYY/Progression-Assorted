@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
+	<!-- simplification -->
 	<Operation Class="XmlExtensions.FindMod">
 		<mods>
 			<li>ferny.progressionproduction</li>
 		</mods>
 		<packageId>true</packageId>
 		<caseTrue>
-			<!-- Progression: Production -->
-			<Operation Class="XmlExtensions.HybridPatch">
-				<xpath>Defs/ResearchProjectDef[defName="Ferny_ResearchBench"]</xpath>
-				<value>
-					<prerequisites Operation="Safe">
-						<li MayRequire="ferny.progressionfurniture" Operation="SafeAdd" Compare="InnerText">Ferny_Tables</li>
-						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Culture</li>
-					</prerequisites>
-					<hiddenPrerequisites Operation="Safe">
-						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Culture</li>
-					</hiddenPrerequisites>
-				</value>
+			<!-- Vanilla Helixien Gas Expanded -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>vanillaexpanded.helixiengas</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.PatchOperationSafeRemove">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_GasCrematorium"]</xpath>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[researchPrerequisites[li="Ferny_GasCrematorium"]]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Ferny_GasCrematorium</li>
+								<li Operation="SafeAdd" Compare="InnerText">VHGE_GasExtraction</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.PatchOperationSafeRemove">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_GasPoweredRefinery"]</xpath>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[researchPrerequisites[li="Ferny_GasPoweredRefinery"]]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">BiofuelRefining</li>
+								<li Operation="SafeRemove" Compare="InnerText">Ferny_GasPoweredRefinery</li>
+								<li Operation="SafeAdd" Compare="InnerText">VHGE_GasExtraction</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
 			</Operation>
+		</caseTrue>
+	</Operation>
+
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressionproduction</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
 			<Operation Class="XmlExtensions.SetScope">
 				<xpath>Defs/ResearchProjectDef[defName="DrugProduction"]</xpath>
 				<apply>
@@ -50,6 +81,63 @@
 					</Operation>
 				</apply>
 			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="BiofuelRefining"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
+					</prerequisites>
+				</value>
+			</Operation>
+			<!-- biofuel refinery -->
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ThingDef[defName="BiofuelRefinery"]</xpath>
+				<value>
+					<researchPrerequisites Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+					</researchPrerequisites>
+				</value>
+			</Operation>
+			<!-- Progression: Production -->
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_ResearchBench"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li MayRequire="ferny.progressionfurniture" Operation="SafeAdd" Compare="InnerText">Ferny_Tables</li>
+					</prerequisites>
+					<hiddenPrerequisites Operation="Safe">
+						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Culture</li>
+					</hiddenPrerequisites>
+				</value>
+			</Operation>
+			<!-- Vanilla Chemfuel Expanded -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>vanillaexpanded.vchemfuele</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- deepchem net -->
+					<!-- deepchem refinery -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="PS_DeepchemRefinery"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- deepchem pumpjack -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VCHE_DeepchemPumpjack"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
 			<!-- Vanilla Helixien Gas Expanded -->
 			<Operation Class="XmlExtensions.FindMod">
 				<mods>
@@ -57,15 +145,13 @@
 				</mods>
 				<packageId>true</packageId>
 				<caseTrue>
+					<!-- gas-powered smithy -->
 					<Operation Class="XmlExtensions.HybridPatch">
-						<xpath>Defs/ResearchProjectDef[defName="Ferny_GasPoweredRefinery"]</xpath>
+						<xpath>Defs/ThingDef[defName="VHGE_GasPoweredSmithy"]</xpath>
 						<value>
-							<prerequisites Operation="Safe">
-								<li Operation="SafeRemove" Compare="InnerText">BiofuelRefining</li>
-							</prerequisites>
-							<hiddenPrerequisites Operation="Safe">
-								<li Operation="SafeAdd" Compare="InnerText">BiofuelRefining</li>
-							</hiddenPrerequisites>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Smithing</li>
+							</researchPrerequisites>
 						</value>
 					</Operation>
 				</caseTrue>
