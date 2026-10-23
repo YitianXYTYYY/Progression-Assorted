@@ -31,6 +31,24 @@
 					</recipeMaker>
 				</value>
 			</Operation>
+			<!-- Biotech -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>ludeon.rimworld.biotech</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="LemonSkin_GasMask"]</xpath>
+						<value>
+							<prerequisites Operation="Safe">
+								<li Operation="SafeRemove" Compare="InnerText">Machining</li>
+								<li Operation="SafeAdd" Compare="InnerText">ToxGas</li>
+							</prerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
 			<!-- Progression: Attire -->
 			<Operation Class="XmlExtensions.HybridPatch">
 				<xpath>Defs/ResearchProjectDef[defName="LemonSkin_ElectricTailoringBench"]</xpath>
