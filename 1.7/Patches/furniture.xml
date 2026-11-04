@@ -30,6 +30,7 @@
 					<researchPrerequisites Inherit="False" Operation="Safe">
 						<li Operation="SafeAdd" Compare="InnerText">Ferny_Bedroll</li>
 						<li Operation="SafeAdd" Compare="InnerText">Ferny_Chair</li>
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_Couches</li>
 						<li MayRequire="vanillaexpanded.vfecore" Operation="SafeAdd" Compare="InnerText">MF_ModernFurniture</li>
 					</researchPrerequisites>
 				</value>
@@ -572,7 +573,6 @@
 					<label Operation="SafeReplace">basic lights</label>
 					<prerequisites Operation="Safe">
 						<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
-						<li MayRequire="vanillaexpanded.vfecore" Operation="SafeAdd" Compare="InnerText">MF_ModernFurniture</li>
 					</prerequisites>
 				</value>
 			</Operation>
@@ -583,14 +583,6 @@
 				</mods>
 				<packageId>true</packageId>
 				<caseTrue>
-					<Operation Class="XmlExtensions.HybridPatch">
-						<xpath>Defs/ResearchProjectDef[defName="Ferny_Brazier"]</xpath>
-						<value>
-							<prerequisites Operation="Safe">
-								<li Operation="SafeRemove" Compare="InnerText">VFET_Furniture</li>
-							</prerequisites>
-						</value>
-					</Operation>
 					<Operation Class="XmlExtensions.HybridPatch">
 						<xpath>Defs/ResearchProjectDef[defName="Ferny_Curtains"]</xpath>
 						<value>
@@ -898,6 +890,24 @@
 							</Operation>
 						</caseTrue>
 					</Operation>
+					<!-- Glass Roofs -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>wailor.glassroofs</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="Ferny_WindowWall"]</xpath>
+								<value>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">GR_Glassworks</li>
+										<li Operation="SafeRemove" Compare="InnerText">Smithing</li>
+									</prerequisites>
+								</value>
+							</Operation>
+						</caseTrue>
+					</Operation>
 				</caseTrue>
 			</Operation>
 			<!-- Undergrounders: Darkfire -->
@@ -1172,6 +1182,28 @@
 								<value>False</value>
 							</Operation>
 						</apply>
+					</Operation>
+					<!-- Royalty -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>ludeon.rimworld.royalty</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="Ferny_Brazier"]</xpath>
+								<value>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeRemove" Compare="InnerText">Smithing</li>
+										<li Operation="SafeAdd" Compare="InnerText">MF_BasicFurniture</li>
+										<li Operation="SafeRemove" Compare="InnerText">VFET_Furniture</li>
+									</prerequisites>
+									<hiddenPrerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">Smithing</li>
+									</hiddenPrerequisites>
+								</value>
+							</Operation>
+						</caseTrue>
 					</Operation>
 					<!-- Progression: Furniture -->
 					<Operation Class="XmlExtensions.HybridPatch">
