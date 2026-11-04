@@ -23,9 +23,11 @@
 		<researchViewX>31.50</researchViewX>
 		<researchViewY>0.50</researchViewY>
 		<prerequisites>
-			<li>Ferny_Bedroll</li>
 			<li>ComplexFurniture</li>
 		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Ferny_Bedroll</li>
+		</hiddenPrerequisites>
 	</ResearchProjectDef>
 
 </Defs>
