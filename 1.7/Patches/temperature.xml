@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="XmlExtensions.FindMod">
+		<mods>
+			<li>ferny.progressiontemperature</li>
+		</mods>
+		<packageId>true</packageId>
+		<caseTrue>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="AirConditioning"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_CeilingFans</li>
+					</prerequisites>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ThingDef[researchPrerequisites[li="AirConditioning"]]</xpath>
+				<value>
+					<researchPrerequisites Inherit="False" Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+					</researchPrerequisites>
+				</value>
+			</Operation>
+			<!-- Vanilla Helixien Gas Expanded -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>vanillaexpanded.helixiengas</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.PatchOperationSafeRemove">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_GasCooler"]</xpath>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[researchPrerequisites[li="Ferny_GasCooler"]]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">AirConditioning</li>
+								<li Operation="SafeRemove" Compare="InnerText">Ferny_GasCooler</li>
+								<li Operation="SafeAdd" Compare="InnerText">VHGE_GasExtraction</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.PatchOperationSafeRemove">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_GasHeater"]</xpath>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[researchPrerequisites[li="Ferny_GasHeater"]]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">AirConditioning</li>
+								<li Operation="SafeRemove" Compare="InnerText">Ferny_GasHeater</li>
+								<li Operation="SafeAdd" Compare="InnerText">VHGE_GasExtraction</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+			<!-- Vanilla Temperature Expanded -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>vanillaexpanded.temperature</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<!-- Progression: Temperature -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_IndustrialCooling"]</xpath>
+						<value>
+							<label Operation="SafeReplace">industrial conditioning</label>
+							<baseCost Operation="SafeReplace">1000</baseCost>
+							<hiddenPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Machining</li>
+							</hiddenPrerequisites>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.PatchOperationSafeRemove">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_IndustrialHeating"]</xpath>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[researchPrerequisites[li="Ferny_IndustrialHeating"]]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_IndustrialCooling</li>
+								<li Operation="SafeRemove" Compare="InnerText">Ferny_IndustrialHeating</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[researchPrerequisites[li="Ferny_IndustrialCooling"]]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- ReBuild: Doors and Corners -->
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>rebuild.cotr.doorsandcorners</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<!-- floor AC unit -->
+							<Operation Class="XmlExtensions.SetScope">
+								<xpath>Defs/ThingDef[defName="RB_ACUnitFloor"]</xpath>
+								<apply>
+									<Operation Class="XmlExtensions.HybridPatch">
+										<xpath>ThingDef</xpath>
+										<value>
+											<researchPrerequisites Inherit="False" Operation="Safe">
+												<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+											</researchPrerequisites>
+										</value>
+									</Operation>
+									<Operation Class="XmlExtensions.PatchOperationAttributeAdd">
+										<xpath>ThingDef/researchPrerequisites</xpath>
+										<attribute>Inherit</attribute>
+										<value>False</value>
+									</Operation>
+								</apply>
+							</Operation>
+						</caseTrue>
+					</Operation>
+					<!-- Vanilla Temperature Expanded -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ResearchProjectDef[defName="VTE_HVAC"]</xpath>
+						<value>
+							<hiddenPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Machining</li>
+							</hiddenPrerequisites>
+						</value>
+					</Operation>
+					<!-- AC control unit -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VTE_ACControlUnit"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- AC unit -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VTE_ACUnit"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- wall-mounted AC unit -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VTE_ACUnitWall"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- AC compressor -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VTE_ACCompressor"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<!-- large AC compressor -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VTE_LargeACCompressor"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Electricity</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+				</caseTrue>
+			</Operation>
+		</caseTrue>
+	</Operation>
+
+</Patch>
