@@ -202,6 +202,20 @@
 		<caseTrue>
 			<!-- Core -->
 			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Autodoors"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_Door</li>
+						<li Operation="SafeAdd" Compare="InnerText">MicroelectronicsBasics</li>
+					</prerequisites>
+					<hiddenPrerequisites Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Ferny_Door</li>
+					</hiddenPrerequisites>
+					<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
 				<xpath>Defs/ResearchProjectDef[defName="ColoredLights"]</xpath>
 				<value>
 					<prerequisites Operation="Safe">
@@ -295,22 +309,12 @@
 				</value>
 			</Operation>
 			<!-- strucuture -->
-			<!-- autodoor -->
-			<Operation Class="XmlExtensions.HybridPatch">
-				<xpath>Defs/ThingDef[defName="Autodoor"]</xpath>
-				<value>
-					<researchPrerequisites Operation="Safe">
-						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
-					</researchPrerequisites>
-				</value>
-			</Operation>
 			<!-- ornate door -->
 			<Operation Class="XmlExtensions.HybridPatch">
 				<xpath>Defs/ThingDef[defName="OrnateDoor"]</xpath>
 				<value>
 					<researchPrerequisites Operation="Safe">
-						<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
-						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+						<li Operation="SafeAdd" Compare="InnerText">Ferny_Door</li>
 					</researchPrerequisites>
 				</value>
 			</Operation>
@@ -355,6 +359,81 @@
 					</Operation>
 				</caseTrue>
 			</Operation>
+			<!-- Anomaly -->
+			<Operation Class="XmlExtensions.FindMod">
+				<mods>
+					<li>ludeon.rimworld.anomaly</li>
+				</mods>
+				<packageId>true</packageId>
+				<caseTrue>
+					<Operation Class="XmlExtensions.FindMod">
+						<mods>
+							<li>rebuild.cotr.doorsandcorners</li>
+						</mods>
+						<packageId>true</packageId>
+						<caseTrue>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ResearchProjectDef[defName="SecurityDoor"]</xpath>
+								<value>
+									<label Operation="SafeReplace">reinforced structures</label>
+									<prerequisites Operation="Safe">
+										<li Operation="SafeRemove" Compare="InnerText">Autodoors</li>
+										<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
+									</prerequisites>
+									<requiredResearchBuilding Operation="SafeAdd">HiTechResearchBench</requiredResearchBuilding>
+									<requiredResearchFacilities Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">MultiAnalyzer</li>
+									</requiredResearchFacilities>
+								</value>
+							</Operation>
+							<!-- building misc -->
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>Defs/ThingDef[defName="SecurityDoor"]</xpath>
+								<value>
+									<researchPrerequisites Operation="Safe">
+										<li Operation="SafeAdd" Compare="InnerText">Autodoors</li>
+									</researchPrerequisites>
+								</value>
+							</Operation>
+							<Operation Class="XmlExtensions.FindMod">
+								<mods>
+									<li>jarocks.securitydoorsexpanded</li>
+								</mods>
+								<packageId>true</packageId>
+								<caseTrue>
+									<!-- security door (1x1) -->
+									<Operation Class="XmlExtensions.HybridPatch">
+										<xpath>Defs/ThingDef[defName="SDE_SecurityDoorSmall"]</xpath>
+										<value>
+											<researchPrerequisites Operation="Safe">
+												<li Operation="SafeAdd" Compare="InnerText">Autodoors</li>
+											</researchPrerequisites>
+										</value>
+									</Operation>
+									<!-- security door (1x3) -->
+									<Operation Class="XmlExtensions.HybridPatch">
+										<xpath>Defs/ThingDef[defName="SDE_SecurityDoorLarge"]</xpath>
+										<value>
+											<researchPrerequisites Operation="Safe">
+												<li Operation="SafeAdd" Compare="InnerText">Autodoors</li>
+											</researchPrerequisites>
+										</value>
+									</Operation>
+									<!-- hangar door (1x5) -->
+									<Operation Class="XmlExtensions.HybridPatch">
+										<xpath>Defs/ThingDef[defName="SDE_VehicleDoor"]</xpath>
+										<value>
+											<researchPrerequisites Operation="Safe">
+												<li Operation="SafeAdd" Compare="InnerText">Autodoors</li>
+											</researchPrerequisites>
+										</value>
+									</Operation>
+								</caseTrue>
+							</Operation>
+						</caseTrue>
+					</Operation>
+				</caseTrue>
+			</Operation>
 			<!-- Odyssey -->
 			<Operation Class="XmlExtensions.FindMod">
 				<mods>
@@ -372,6 +451,14 @@
 								<li Operation="SafeAdd" Compare="InnerText">Ferny_Bridge</li>
 							</hiddenPrerequisites>
 						</value>
+					</Operation>
+					<!-- vac barrier -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="VacBarrier"]</xpath>
+						<value>
+							<researchPrerequisites Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Autodoors</li>
+							</researchPrerequisites></value>
 					</Operation>
 				</caseTrue>
 			</Operation>
@@ -521,7 +608,7 @@
 			<Operation Class="XmlExtensions.HybridPatch">
 				<xpath>Defs/ResearchProjectDef[defName="Ferny_EndTable"]</xpath>
 				<value>
-					<label Operation="SafeReplace">bedroom decoration</label>
+					<label Operation="SafeReplace">bedroom decorations</label>
 					<prerequisites Operation="Safe">
 						<li Operation="SafeAdd" Compare="InnerText">ComplexFurniture</li>
 						<li Operation="SafeRemove" Compare="InnerText">Ferny_Tables</li>
@@ -573,6 +660,24 @@
 					<label Operation="SafeReplace">basic lights</label>
 					<prerequisites Operation="Safe">
 						<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
+					</prerequisites>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_OrnateDoors"]</xpath>
+				<value>
+					<label Operation="SafeReplace">ornate structures</label>
+					<prerequisites Operation="Safe">
+						<li Operation="SafeAdd" Compare="InnerText">Smithing</li>
+						<li Operation="SafeRemove" Compare="InnerText">Ferny_Door</li>
+					</prerequisites>
+				</value>
+			</Operation>
+			<Operation Class="XmlExtensions.HybridPatch">
+				<xpath>Defs/ResearchProjectDef[defName="Ferny_Wall"]</xpath>
+				<value>
+					<prerequisites Operation="Safe">
+						<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
 					</prerequisites>
 				</value>
 			</Operation>
@@ -643,6 +748,36 @@
 				</mods>
 				<packageId>true</packageId>
 				<caseTrue>
+					<!-- Progression: Furniture -->
+					<Operation Class="XmlExtensions.SetScope">
+						<xpath>Defs/ResearchProjectDef[defName="Ferny_WindowWall"]</xpath>
+						<apply>
+							<Operation Class="XmlExtensions.HybridPatch">
+								<xpath>ResearchProjectDef</xpath>
+								<value>
+									<label Operation="SafeReplace">glass structures</label>
+								</value>
+							</Operation>
+							<Operation Class="XmlExtensions.FindMod">
+								<mods>
+									<li>wailor.glassroofs</li>
+								</mods>
+								<packageId>true</packageId>
+								<caseTrue>
+									<Operation Class="XmlExtensions.HybridPatch">
+										<xpath>ResearchProjectDef</xpath>
+										<value>
+											<prerequisites Operation="Safe">
+												<li Operation="SafeAdd" Compare="InnerText">GR_Glassworks</li>
+												<li Operation="SafeRemove" Compare="InnerText">Smithing</li>
+											</prerequisites>
+										</value>
+									</Operation>
+								</caseTrue>
+							</Operation>
+						</apply>
+					</Operation>
+					<!-- ReBuild: Doors and Corners -->
 					<!-- floors -->
 					<!-- grate metal base -->
 					<Operation Class="XmlExtensions.HybridPatch">
@@ -709,7 +844,7 @@
 									</researchPrerequisites>
 								</value>
 							</Operation>
-							<Operation Class="XmlExtensions.PatchOperationAttributeAdd">
+							<Operation Class="XmlExtensions.PatchOperationAttributeSet">
 								<xpath>ThingDef/researchPrerequisites</xpath>
 								<attribute>Inherit</attribute>
 								<value>False</value>
@@ -724,7 +859,6 @@
 							<researchPrerequisites Operation="Safe">
 								<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
 								<li Operation="SafeAdd" Compare="InnerText">Ferny_WindowWall</li>
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
@@ -733,18 +867,8 @@
 						<xpath>Defs/ThingDef[defName="RB_ReinforcedGlassAutodoor"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
 								<li Operation="SafeAdd" Compare="InnerText">Ferny_WindowWall</li>
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
-							</researchPrerequisites>
-						</value>
-					</Operation>
-					<!-- double autodoor -->
-					<Operation Class="XmlExtensions.HybridPatch">
-						<xpath>Defs/ThingDef[defName="RB_DoubleAutodoor"]</xpath>
-						<value>
-							<researchPrerequisites Operation="Safe">
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">SecurityDoor</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
@@ -753,17 +877,15 @@
 						<xpath>Defs/ThingDef[defName="RB_LargeOrnateDoor"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Door</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
-					<!-- cell door -->
 					<Operation Class="XmlExtensions.HybridPatch">
 						<xpath>Defs/ThingDef[defName="RB_CellDoor"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Door</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
@@ -778,12 +900,30 @@
 						</value>
 					</Operation>
 					<!-- structure walls -->
-					<!-- clerestory wall -->
+					<!-- wall base -->
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[@Name="RB_WallBase"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
+								<li Operation="SafeRemove" Compare="InnerText">VFET_Construction</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
+					<Operation Class="XmlExtensions.HybridPatch">
+						<xpath>Defs/ThingDef[defName="RB_OrnateWall"]</xpath>
+						<value>
+							<researchPrerequisites Inherit="False" Operation="Safe">
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_OrnateDoors</li>
+								<li Operation="SafeRemove" Compare="InnerText">MF_RoyalFurniture</li>
+							</researchPrerequisites>
+						</value>
+					</Operation>
 					<Operation Class="XmlExtensions.HybridPatch">
 						<xpath>Defs/ThingDef[defName="RB_ClerestoryWall"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
@@ -792,9 +932,9 @@
 						<xpath>Defs/ThingDef[defName="RB_ReinforcedClerestoryWall"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
 								<li Operation="SafeAdd" Compare="InnerText">Ferny_WindowWall</li>
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">SecurityDoor</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
@@ -803,7 +943,7 @@
 						<xpath>Defs/ThingDef[defName="RB_GlassWall"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
@@ -812,13 +952,12 @@
 						<xpath>Defs/ThingDef[defName="RB_ReinforcedGlassWall"]</xpath>
 						<value>
 							<researchPrerequisites Operation="Safe">
-								<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
+								<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
 								<li Operation="SafeAdd" Compare="InnerText">Ferny_WindowWall</li>
-								<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+								<li Operation="SafeAdd" Compare="InnerText">SecurityDoor</li>
 							</researchPrerequisites>
 						</value>
 					</Operation>
-					<!-- Anomaly -->
 					<Operation Class="XmlExtensions.FindMod">
 						<mods>
 							<li>ludeon.rimworld.anomaly</li>
@@ -830,13 +969,12 @@
 								<xpath>Defs/ThingDef[defName="RB_LargeSecurityDoor"]</xpath>
 								<value>
 									<researchPrerequisites Operation="Safe">
-										<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+										<li Operation="SafeAdd" Compare="InnerText">Autodoors</li>
 									</researchPrerequisites>
 								</value>
 							</Operation>
 						</caseTrue>
 					</Operation>
-					<!-- Odyssey -->
 					<Operation Class="XmlExtensions.FindMod">
 						<mods>
 							<li>ludeon.rimworld.odyssey</li>
@@ -849,7 +987,9 @@
 								<value>
 									<label Operation="SafeReplace">gravship smooth hull</label>
 									<researchPrerequisites Operation="Safe">
-										<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+										<li Operation="SafeAdd" Compare="InnerText">BasicGravtech</li>
+										<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
+										<li Operation="SafeRemove" Compare="InnerText">StandardGravtech</li>
 									</researchPrerequisites>
 									<terrainAffordanceNeeded Operation="SafeReplace">Substructure</terrainAffordanceNeeded>
 								</value>
@@ -865,9 +1005,9 @@
 									</costList>
 									<researchPrerequisites Operation="Safe">
 										<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
-										<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
+										<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
 										<li Operation="SafeAdd" Compare="InnerText">Ferny_WindowWall</li>
-										<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+										<li Operation="SafeAdd" Compare="InnerText">SecurityDoor</li>
 									</researchPrerequisites>
 									<terrainAffordanceNeeded Operation="SafeReplace">Substructure</terrainAffordanceNeeded>
 								</value>
@@ -881,29 +1021,11 @@
 									</costList>
 									<researchPrerequisites Operation="Safe">
 										<li Operation="SafeRemove" Compare="InnerText">Electricity</li>
-										<li Operation="SafeAdd" Compare="InnerText">Fabrication</li>
+										<li Operation="SafeAdd" Compare="InnerText">Ferny_Wall</li>
 										<li Operation="SafeAdd" Compare="InnerText">Ferny_WindowWall</li>
-										<li MayRequire="oskarpotocki.vfe.tribals" Operation="SafeAdd" Compare="InnerText">VFET_Construction</li>
+										<li Operation="SafeAdd" Compare="InnerText">SecurityDoor</li>
 									</researchPrerequisites>
 									<terrainAffordanceNeeded Operation="SafeReplace">Substructure</terrainAffordanceNeeded>
-								</value>
-							</Operation>
-						</caseTrue>
-					</Operation>
-					<!-- Glass Roofs -->
-					<Operation Class="XmlExtensions.FindMod">
-						<mods>
-							<li>wailor.glassroofs</li>
-						</mods>
-						<packageId>true</packageId>
-						<caseTrue>
-							<Operation Class="XmlExtensions.HybridPatch">
-								<xpath>Defs/ResearchProjectDef[defName="Ferny_WindowWall"]</xpath>
-								<value>
-									<prerequisites Operation="Safe">
-										<li Operation="SafeAdd" Compare="InnerText">GR_Glassworks</li>
-										<li Operation="SafeRemove" Compare="InnerText">Smithing</li>
-									</prerequisites>
 								</value>
 							</Operation>
 						</caseTrue>
@@ -958,12 +1080,12 @@
 									<costList Operation="Safe">
 										<Gold Operation="SafeReplace">100</Gold>
 									</costList>
-									<researchPrerequisites Operation="Safe">
+									<researchPrerequisites Inherit="False" Operation="Safe">
 										<li Operation="SafeAdd" Compare="InnerText">Ferny_Tables</li>
 									</researchPrerequisites>
 								</value>
 							</Operation>
-							<Operation Class="XmlExtensions.PatchOperationAttributeAdd">
+							<Operation Class="XmlExtensions.PatchOperationAttributeSet">
 								<xpath>ThingDef/researchPrerequisites</xpath>
 								<attribute>Inherit</attribute>
 								<value>False</value>
@@ -1071,7 +1193,7 @@
 							<Operation Class="XmlExtensions.HybridPatch">
 								<xpath>Defs/ResearchProjectDef[defName="VFEE_NobleDecorations"]</xpath>
 								<value>
-									<label Operation="SafeReplace">imperial decoration</label>
+									<label Operation="SafeReplace">imperial decorations</label>
 									<prerequisites Operation="Safe">
 										<li Operation="SafeRemove" Compare="InnerText">ComplexFurniture</li>
 										<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
@@ -1170,13 +1292,13 @@
 							<Operation Class="XmlExtensions.HybridPatch">
 								<xpath>ThingDef</xpath>
 								<value>
-									<researchPrerequisites Operation="Safe">
+									<researchPrerequisites Inherit="False" Operation="Safe">
 										<li Operation="SafeAdd" Compare="InnerText">Ferny_Bedroll</li>
 										<li Operation="SafeAdd" Compare="InnerText">MF_RoyalFurniture</li>
 									</researchPrerequisites>
 								</value>
 							</Operation>
-							<Operation Class="XmlExtensions.PatchOperationAttributeAdd">
+							<Operation Class="XmlExtensions.PatchOperationAttributeSet">
 								<xpath>ThingDef/researchPrerequisites</xpath>
 								<attribute>Inherit</attribute>
 								<value>False</value>
@@ -1580,7 +1702,7 @@
 									</researchPrerequisites>
 								</value>
 							</Operation>
-							<Operation Class="XmlExtensions.PatchOperationAttributeAdd">
+							<Operation Class="XmlExtensions.PatchOperationAttributeSet">
 								<xpath>ThingDef/researchPrerequisites</xpath>
 								<attribute>Inherit</attribute>
 								<value>False</value>
